@@ -7,15 +7,15 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-/* Ativação do modo Scroll Contínuo e Suave */
+/* Configuração de Rolagem Suave */
 html { scroll-behavior: smooth; }
 body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overflow-x: hidden; }
 
-/* Navbar Superior */
+/* Navbar Superior Fixo */
 #navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 8%; position: fixed; width: 100%; z-index: 1000; transition: all 0.3s; }
 #navbar.scrolled { background: rgba(7, 11, 18, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.1rem 8%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
 
-/* Letras do Menu ajustadas de acordo com a logo (robustas e marcantes) */
+/* Letras do Menu ajustadas (Robustas e Marcantes) */
 .logo-text { 
     font-family: 'Orbitron', sans-serif; 
     font-size: 1.8rem; 
@@ -24,7 +24,7 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
     text-transform: uppercase;
 }
 
-/* Efeito Dourado Escovado e Metalizado da Logo */
+/* Efeito Degradê Dourado Metalizado da Logo */
 .gold-metallic {
     background: linear-gradient(135deg, #ffe066 0%, #d4af37 40%, #aa8010 70%, #f3e5ab 100%);
     -webkit-background-clip: text;
@@ -32,7 +32,7 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5));
 }
 
-/* Efeito Azul Real da Logo Oficial */
+/* Efeito Degradê Azul Metálico da Logo */
 .blue-metallic {
     background: linear-gradient(135deg, #5da9e9 0%, #1a5f9b 40%, #0c2e4e 80%, #3a86c8 100%);
     -webkit-background-clip: text;
@@ -47,27 +47,19 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
 .btn-nav-contato { padding: 0.5rem 1.2rem; border: 1px solid #d4af37; color: #d4af37 !important; border-radius: 4px; font-family: 'Orbitron', sans-serif; font-weight: 700 !important; }
 .btn-nav-contato:hover { background: #d4af37; color: var(--bg-dark) !important; }
 
-/* Container Perfeito para a Logo Circular */
+/* Seção de Entrada (Hero) - Centralização Total Sem Imagens ou Círculos */
 .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; background: radial-gradient(circle at center, #0f1a2e 0%, #070b12 100%); position: relative; }
 .hero-content { width: 100%; max-width: 800px; }
 
-.brand-logo-circle {
-    width: 320px; 
-    height: 320px; 
-    border-radius: 50%;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    margin: 0 auto 2.5rem auto;
-    overflow: hidden; 
-}
-
-/* Garante que a logo se encaixe de forma uniforme sem distorcer */
-.main-logo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* O Novo Título Principal - PH3D Letras Gigantes e Fortes */
+.hero-main-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 6.5rem;
+    font-weight: 900;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
 }
 
 .subtitle { font-size: 1.2rem; color: var(--titanium-silver); margin-bottom: 3.5rem; max-width: 650px; margin-left: auto; margin-right: auto; font-weight: 400; }
@@ -80,7 +72,7 @@ h2 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 2px
 .about-story { max-width: 780px; margin: 0 auto; }
 .about-story p { margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--titanium-silver); }
 
-/* Caixa de Status / Contador Dinâmico */
+/* Painel de Atendimentos */
 .live-counter-section { padding: 4rem 10%; display: flex; justify-content: center; }
 .counter-box { background: linear-gradient(135deg, rgba(15,23,42,0.95) 0%, rgba(7,11,18,0.99) 100%); padding: 3.5rem 2.5rem; border-radius: 12px; text-align: center; max-width: 650px; width: 100%; border: 1px solid rgba(214, 175, 55, 0.15); box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
 .live-indicator { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 1rem; }
@@ -91,7 +83,7 @@ h2 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 2px
 .counter-display-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem; }
 #live-chat-count { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 700; color: #d4af37; line-height: 1; }
 
-/* Botão Vermelho Pulsante */
+/* Botão de Alerta Pulsante */
 .btn-piscando-live {
     background-color: #c0392b; color: #ffffff; padding: 0.7rem 1.8rem;
     border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 700;
@@ -105,7 +97,7 @@ h2 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 2px
 }
 .counter-desc { color: var(--titanium-silver); font-size: 0.9rem; }
 
-/* Grid de Cards dos Serviços Maker */
+/* Grid de Serviços Organizados */
 .services { padding: 6rem 8%; }
 .section-title { text-align: center; margin-bottom: 4rem; }
 .section-title p { color: var(--titanium-silver); }
@@ -116,7 +108,7 @@ h2 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 2px
 .card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.25rem; margin-bottom: 1rem; color: #ffffff; letter-spacing: 1px; }
 .card p { color: var(--titanium-silver); font-size: 0.9rem; }
 
-/* Contato e Botão Oficial do WhatsApp */
+/* Contato & Links Oficiais do WhatsApp */
 .contact-section { padding: 8rem 10%; text-align: center; }
 .btn-final-whatsapp {
     display: inline-flex; align-items: center; gap: 12px;
@@ -128,23 +120,24 @@ h2 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 2px
 .btn-final-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
 .wa-icon-inline { width: 22px; height: 22px; }
 
-/* Footer */
+/* Rodapé */
 footer { padding: 3rem 5%; text-align: center; background: #04060a; border-top: 1px solid rgba(255,255,255,0.01); }
 footer p { font-size: 0.85rem; color: #4a5568; }
 .konekta-credit { margin-top: 0.5rem; font-size: 0.8rem; color: #718096; }
 .konekta-credit span { color: #ffffff; font-weight: 600; letter-spacing: 1px; }
 
-/* WhatsApp Fixo Lateral */
+/* Ícone Fixo do WhatsApp */
 .whatsapp-float { position: fixed; width: 55px; height: 55px; bottom: 30px; right: 30px; background-color: #25d366; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s; }
 .whatsapp-icon { width: 26px; height: 26px; }
 .whatsapp-float:hover { transform: translateY(-4px); }
 
-/* Efeito de Revelação ao Rolar a Tela (Scroll Reveal) */
+/* Configuração de Entrada Scroll Reveal Animação */
 .reveal-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform, opacity; }
 .reveal-scroll.active { opacity: 1; transform: translateY(0); }
 
+/* Responsividade Mobile Extrema */
 @media (max-width: 850px) {
+    .hero-main-title { font-size: 4.2rem; letter-spacing: -2px; }
     .services-grid { flex-direction: column; }
     #navbar ul { display: none; }
-    .brand-logo-circle { width: 260px; height: 260px; }
 }
