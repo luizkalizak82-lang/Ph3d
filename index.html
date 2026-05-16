@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PH3D | Impressão 3D & Colecionáveis</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght=400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -37,12 +37,27 @@
                     </div>
                 </div>
                 
-                <h1 class="circuit-logo">
-                    <span id="letter-p" class="letter circuit-gold">P</span>
-                    <span id="letter-h" class="letter circuit-gold">H</span>
-                    <span id="letter-3" class="letter circuit-blue">3</span>
-                    <span id="letter-d" class="letter circuit-blue">D</span>
-                </h1>
+                <svg class="printer-svg-logo" viewBox="0 0 600 150">
+                    <defs>
+                        <pattern id="circuit-pattern" width="15" height="15" patternUnits="userSpaceOnUse">
+                            <path d="M0 0h15v15H0z" fill="none"/>
+                            <path d="M1.5 1.5h12v12h-12z" fill="none" stroke="rgba(7,11,18,0.85)" stroke-width="2"/>
+                            <path d="M0 7.5h15M7.5 0v15" stroke="rgba(7,11,18,0.4)" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+
+                    <path id="path-p" class="vector-letter gold-circuit" 
+                          d="M 50,130 L 50,30 L 100,30 C 130,30 130,75 100,75 L 50,75" />
+
+                    <path id="path-h" class="vector-letter gold-circuit" 
+                          d="M 160,130 L 160,30 M 160,75 L 220,75 M 220,130 L 220,30" />
+
+                    <path id="path-3" class="vector-letter blue-circuit" 
+                          d="M 280,30 L 340,30 L 305,75 C 335,75 345,100 340,115 C 335,130 305,130 280,130" />
+
+                    <path id="path-d" class="vector-letter blue-circuit" 
+                          d="M 400,130 L 400,30 L 440,30 C 490,30 490,130 440,130 Z" />
+                </svg>
                 
                 <div class="printer-bed"></div>
             </div>
@@ -54,13 +69,13 @@
 
     <section id="sobre" class="about-section">
         <div class="container">
-            <h2 class="reveal-scroll">Ideias Que Viram Realidade</h2>
+            <h2 class="reveal-scroll">Ideias Que Viram Reality</h2>
             <div class="about-story reveal-scroll">
                 <p>
                     A <strong>PH3D</strong> transforma conceitos virtuais e arquivos digitais em objetos físicos de alta precisão, camada por camada. 
                 </p>
                 <p>
-                    Seja uma peça de reposição específica que quebrou e você não encontra no mercado, um protótipo para o seu projeto ou chaveiros e brindes personalizados, nós materializamos a sua ideia de forma ágil e sem burocracia.
+                    Seja uma peça de reposição específica que quebrou, um protótipo para o seu projeto ou chaveiros e brindes personalizados, nós materializamos a sua ideia.
                 </p>
             </div>
         </div>
@@ -83,23 +98,23 @@
     <section id="servicos" class="services">
         <div class="section-title reveal-scroll">
             <h2>Modelagem & Prototipagem</h2>
-            <p>Desenvolvimento de arquivos CAD e testes funcionais rápidos para validação de design antes da escala de produção.</p>
+            <p>Desenvolvimento de arquivos CAD e testes funcionais rápidos para validação de design.</p>
         </div>
         <div class="services-grid">
             <div class="card reveal-scroll">
                 <div class="card-img-placeholder">🔑</div>
                 <h3>Chaveiros & Brindes</h3>
-                <p>Chaveiros personalizados com marcas, nomes ou formatos criativos. Ideal para brindes marcantes e lembranças exclusivas.</p>
+                <p>Chaveiros personalizados com marcas, nomes ou formatos criativos.</p>
             </div>
             <div class="card reveal-scroll">
                 <div class="card-img-placeholder">🖨️</div>
                 <h3>Action Figures & Geeks</h3>
-                <p>Miniaturas altamente detalhadas, bustos, personagens da cultura pop e objetos decorativos customizados com o seu estilo.</p>
+                <p>Miniaturas altamente detalhadas, bustos e objetos decorativos customizados.</p>
             </div>
             <div class="card reveal-scroll">
-                <div class="card-img-placeholder">⚙ decay</div>
+                <div class="card-img-placeholder">⚙️</div>
                 <h3>Componentes Técnicos</h3>
-                <p>Engrenagens, suportes domésticos, presilhas e componentes sob medida para consertar o que você precisa em casa.</p>
+                <p>Engrenagens, suportes domésticos e componentes sob medida.</p>
             </div>
         </div>
     </section>
@@ -107,7 +122,7 @@
     <section id="contato" class="contact-section">
         <div class="reveal-scroll">
             <h2>Tem uma ideia ou arquivo pronto?</h2>
-            <p style="margin-bottom: 2.5rem; color: #a0aec0;">Clique abaixo para nos chamar no WhatsApp, enviar sua ideia e fazer seu orçamento imediato.</p>
+            <p style="margin-bottom: 2.5rem; color: #a0aec0;">Clique abaixo para nos chamar no WhatsApp e fazer seu orçamento imediato.</p>
             <div class="cta-container">
                 <a href="https://wa.me/5547996414795?text=Olá!%20Quero%20fazer%20um%20orçamento%20de%20impressão%203D%20com%20a%20PH3D." class="btn-final-whatsapp" target="_blank">
                     <svg viewBox="0 0 32 32" class="wa-icon-inline"><path d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-2A13 13 0 1 0 16 2zm6.7 18.5c-.3.8-1.5 1.6-2.4 1.7-.6.1-1.4.2-3.9-.8-3.2-1.3-5.3-4.6-5.5-4.8-.2-.2-1.4-1.9-1.4-3.6 0-1.7.9-2.5 1.2-2.9.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.8 2 .9 2.2.1.2.1.4 0 .6-.1.2-.2.4-.4.6-.2.2-.4.4-.5.6-.2.2-.3.4-.1.8.3.5 1.1 1.9 2.4 3.1 1.7 1.5 3.1 2 3.6 2.2.4.2.7.1.9-.1.3-.3 1.1-1.3 1.4-1.8.3-.5.5-.4.8-.3.4.1 2.3 1.1 2.7 1.3.4.2.7.3.8.4.1.2.1 1-.2 1.8z" fill="currentColor"/></svg>
