@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const navbar = document.querySelector("#navbar");
     const counterElement = document.getElementById("live-chat-count");
 
-    // Configurações dos elementos da animação sequencial de impressão
+    // Seleção dos elementos do cabeçote mecânico e das letras individuais
     const axisX = document.getElementById("printer-laser-axis");
     const nozzleHead = document.querySelector(".nozzle-head");
     
@@ -12,51 +12,49 @@ document.addEventListener("DOMContentLoaded", function() {
     const letter3 = document.getElementById("letter-3");
     const letterD = document.getElementById("letter-d");
 
-    // 1. ENGINE AUTOMÁTICA DA IMPRESSORA (Desenho letra por letra)
-    function startPrintingProcess() {
+    // 🚀 ENGINE MECÂNICA DA IMPRESSORA (Desenha sequencialmente P -> H -> 3 -> D)
+    function runIndustrialPrinter() {
         if (!axisX || !nozzleHead) return;
 
-        // Reset inicial de estado físico
-        axisX.style.transform = "translateY(190px)"; // Começa embaixo na cama
+        // Reseta posições e remove as classes caso queira loopar futuramente
+        axisX.style.transform = "translateY(220px)"; 
         nozzleHead.style.left = "0%";
+        [letterP, letterH, letter3, letterD].forEach(l => { if(l) l.classList.remove("printed"); });
         
-        let timeline = [
-            // Passo 1: Imprime a letra P
-            { time: 500,  y: 130, x: 18, activeLetter: letterP },
-            { time: 1200, y: 100, x: 24, activeLetter: letterP },
+        // Cronograma exato de movimentação física do bico sobre cada caractere
+        let workflow = [
+            { delay: 400,  y: 140, x: 14, targetLetter: letterP },
+            { delay: 1100, y: 105, x: 22, targetLetter: letterP },
             
-            // Passo 2: Move e imprime a letra H
-            { time: 2000, y: 130, x: 40, activeLetter: letterH },
-            { time: 2700, y: 100, x: 46, activeLetter: letterH },
+            { delay: 1900, y: 140, x: 38, targetLetter: letterH },
+            { delay: 2600, y: 105, x: 46, targetLetter: letterH },
             
-            // Passo 3: Move e imprime o número 3
-            { time: 3500, y: 130, x: 62, activeLetter: letter3 },
-            { time: 4200, y: 100, x: 68, activeLetter: letter3 },
+            { delay: 3400, y: 140, x: 60, targetLetter: letter3 },
+            { delay: 4100, y: 105, x: 68, targetLetter: letter3 },
             
-            // Passo 4: Move e imprime a letra D
-            { time: 5000, y: 130, x: 82, activeLetter: letterD },
-            { time: 5700, y: 100, x: 88, activeLetter: letterD },
+            { delay: 4900, y: 140, x: 80, targetLetter: letterD },
+            { delay: 5600, y: 105, x: 86, targetLetter: letterD },
             
-            // Passo Final: Bico sobe e limpa a área de trabalho
-            { time: 6800, y: 20,  x: 50, activeLetter: null }
+            // Finalização: O cabeçote sobe totalmente liberando a visualização limpa da logo
+            { delay: 6600, y: 15,  x: 46, targetLetter: null }
         ];
 
-        timeline.forEach(step => {
+        workflow.forEach(step => {
             setTimeout(() => {
                 axisX.style.transform = `translateY(${step.y}px)`;
                 nozzleHead.style.left = `${step.x}%`;
                 
-                if (step.activeLetter) {
-                    step.activeLetter.classList.add("printed");
+                if (step.targetLetter) {
+                    step.targetLetter.classList.add("printed");
                 }
-            }, step.time);
+            }, step.delay);
         });
     }
 
-    // Dispara o processo mecânico assim que carrega
-    startPrintingProcess();
+    // Executa a automação assim que a página renderiza
+    runIndustrialPrinter();
 
-    // 2. Controle de Rolagem da Navbar
+    // Menu Rolagem (Navbar background change)
     window.addEventListener("scroll", function() {
         if (window.scrollY > 40) {
             navbar.classList.add("scrolled");
@@ -65,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // 3. Mecanismo Scroll Reveal
+    // Scroll Reveal (Revelação suave ao rolar a página)
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -73,29 +71,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 scrollObserver.unobserve(entry.target); 
             }
         });
-    }, {
-        root: null,
-        threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
-    const elementsToReveal = document.querySelectorAll(".reveal-scroll");
-    elementsToReveal.forEach(el => scrollObserver.observe(el));
+    document.querySelectorAll(".reveal-scroll").forEach(el => scrollObserver.observe(el));
 
-    // 4. Mecanismo do Contador Dinâmico do WhatsApp
-    let currentPeople = Math.floor(Math.random() * (22 - 12 + 1)) + 12;
-    if (counterElement) counterElement.textContent = currentPeople;
+    // Contador de Usuários Ativos (Modo Dinâmico Realista)
+    let activeClients = Math.floor(Math.random() * (22 - 12 + 1)) + 12;
+    if (counterElement) counterElement.textContent = activeClients;
 
-    function updateCounter() {
-        const change = Math.floor(Math.random() * 3) - 1; 
-        currentPeople += change;
+    function simulatedTraffic() {
+        const variance = Math.floor(Math.random() * 3) - 1; 
+        activeClients += variance;
 
-        if (currentPeople < 11) currentPeople = 13;
-        if (currentPeople > 35) currentPeople = 26;
+        if (activeClients < 11) activeClients = 14;
+        if (activeClients > 35) activeClients = 24;
 
-        if (counterElement) counterElement.textContent = currentPeople;
-
-        setTimeout(updateCounter, Math.floor(Math.random() * 3000) + 3000);
+        if (counterElement) counterElement.textContent = activeClients;
+        setTimeout(simulatedTraffic, Math.floor(Math.random() * 3000) + 3000);
     }
-
-    if (counterElement) setTimeout(updateCounter, 3000);
+    if (counterElement) setTimeout(simulatedTraffic, 3000);
 });
