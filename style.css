@@ -151,7 +151,6 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
 .contact-section { padding: 6rem 5%; text-align: center; }
 .contact-section h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 1rem; }
 .btn-final-whatsapp { display: inline-block; background: #25d366; color: #fff; padding: 1.1rem 3rem; border-radius: 30px; text-decoration: none; font-weight: 700; font-family: 'Orbitron', sans-serif; letter-spacing: 0.5px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); transition: transform 0.2s; }
-.btn-final-whatsapp:hover { transform: scale(1.03); }
 
 footer { padding: 2.5rem; text-align: center; background: #04060a; color: #4a5568; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.02); }
 
@@ -163,5 +162,4 @@ footer { padding: 2.5rem; text-align: center; background: #04060a; color: #4a556
     .services-grid { flex-direction: column; }
     #navbar ul { display: none; }
     .vector-letter { stroke-width: 15px; } 
-    .hero h1 { font-size: 2rem; }
 }
