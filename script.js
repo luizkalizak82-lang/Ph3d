@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const navbar = document.querySelector("#navbar");
     const counterElement = document.getElementById("live-chat-count");
 
-    // 1. Navbar muda a opacidade do fundo durante a rolagem da página
+    // 1. Controle da transparência do Menu Superior dinâmico
     window.addEventListener("scroll", function() {
         if (window.scrollY > 40) {
             navbar.classList.add("scrolled");
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // 2. Scroll Reveal: ativa as seções suavemente ao rolar até elas
+    // 2. Scroll Reveal: Efeito dinâmico de aparição suave dos elementos
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -28,17 +28,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const elementsToReveal = document.querySelectorAll(".reveal-scroll");
     elementsToReveal.forEach(el => scrollObserver.observe(el));
 
-    // 3. Gerenciamento do Contador de pessoas ativas
+    // 3. Mecanismo de Flutuação Realista do Contador Online
     let currentPeople = Math.floor(Math.random() * (22 - 12 + 1)) + 12;
     if (counterElement) counterElement.textContent = currentPeople;
 
     function updateCounter() {
-        const change = Math.floor(Math.random() * 3) - 1; // Flutua em -1, 0 ou +1
+        const change = Math.floor(Math.random() * 3) - 1; // Produz variação de -1, 0 ou +1
         currentPeople += change;
 
-        // Mantém as variações dentro de um escopo orgânico e crível
-        if (currentPeople < 10) currentPeople = 12;
-        if (currentPeople > 35) currentPeople = 28;
+        // Mantém as margens controladas e verossímeis
+        if (currentPeople < 11) currentPeople = 13;
+        if (currentPeople > 35) currentPeople = 26;
 
         if (counterElement) {
             counterElement.textContent = currentPeople;
