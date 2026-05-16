@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const heroVideo = document.querySelector("#heroVideo");
     const counterElement = document.getElementById("live-chat-count");
 
-    // 1. Navbar muda de cor no scroll
+    // 1. Navbar ganha fundo denso ao rolar a página
     window.addEventListener("scroll", function() {
         if (window.scrollY > 50) {
             navbar.classList.add("scrolled");
@@ -12,46 +12,49 @@ document.addEventListener("DOMContentLoaded", function() {
             navbar.classList.remove("scrolled");
         }
         
-        // 2. Efeito Parallax sutil no vídeo do topo baseado no scroll
+        // 2. Parallax suave no vídeo de fundo da home
         if (heroVideo && window.scrollY < window.innerHeight) {
             let scrollOffset = window.scrollY * 0.4;
             heroVideo.style.transform = `translateY(${scrollOffset}px)`;
         }
     });
 
-    // 3. Sistema inteligente para revelar elementos ao descer a tela (Scroll Reveal)
+    // 3. Sistema para monitorar o scroll e fazer os elementos surgirem na tela
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("active");
-                // Uma vez animado, não precisa observar mais
-                scrollObserver.unobserve(entry.target);
+                scrollObserver.unobserve(entry.target); // Executa a animação apenas uma vez
             }
         });
     }, {
         root: null,
-        threshold: 0.15 // Dispara quando 15% do elemento estiver visível na tela
+        threshold: 0.12 // Elemento surge ao expor 12% da sua área útil
     });
 
-    // Seleciona todos os blocos com a classe de animação e joga no observador
     const elementsToReveal = document.querySelectorAll(".reveal-scroll");
     elementsToReveal.forEach(el => scrollObserver.observe(el));
 
 
-    // 4. Algoritmo de oscilação estável do Chat (Entre 10 e 40 pessoas)
+    // 4. Algoritmo de oscilação do Chat (Garante variação contínua entre 10 e 40)
     let currentPeople = Math.floor(Math.random() * (40 - 10 + 1)) + 10;
     if (counterElement) counterElement.textContent = currentPeople;
 
     function updateCounter() {
-        const change = Math.floor(Math.random() * 7) - 3; // varia de -3 a +3
+        // Gera flutuação leve (ex: entra ou sai 1 a 3 pessoas)
+        const change = Math.floor(Math.random() * 7) - 3;
         currentPeople += change;
 
-        if (currentPeople < 10) currentPeople = 10 + Math.floor(Math.random() * 3);
-        if (currentPeople > 40) currentPeople = 40 - Math.floor(Math.random() * 3);
+        // Limita a oscilação de forma natural nas extremidades
+        if (currentPeople < 10) currentPeople = 10 + Math.floor(Math.random() * 4);
+        if (currentPeople > 40) currentPeople = 40 - Math.floor(Math.random() * 4);
 
-        if (counterElement) counterElement.textContent = currentPeople;
+        if (counterElement) {
+            counterElement.textContent = currentPeople;
+        }
 
-        const nextInterval = Math.floor(Math.random() * 3000) + 2000;
+        // Próxima mudança em um intervalo variável de 2.5 a 5.5 segundos
+        const nextInterval = Math.floor(Math.random() * 3000) + 2500;
         setTimeout(updateCounter, nextInterval);
     }
 
