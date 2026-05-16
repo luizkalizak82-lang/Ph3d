@@ -3,76 +3,84 @@ document.addEventListener("DOMContentLoaded", function() {
     const navbar = document.querySelector("#navbar");
     const counterElement = document.getElementById("live-chat-count");
 
-    // Seleção da estrutura mecânica
+    // Elementos da mecânica industrial da impressora
     const axisX = document.getElementById("printer-laser-axis");
     const nozzleHead = document.querySelector(".nozzle-head");
     
-    // Seleção dos caminhos vetoriais geométricos das letras
+    // Caminhos vetoriais das letras
     const pathP = document.getElementById("path-p");
     const pathH = document.getElementById("path-h");
     const path3 = document.getElementById("path-3");
     const pathD = document.getElementById("path-d");
 
-    // 🚀 ENGINE DE ENGENHARIA DE IMPRESSÃO (Traçado Milimétrico)
-    function executeVectorPrinting() {
+    // 🚀 ENGINE DE PROGRESSÃO MILIMÉTRICA POR COORDENADAS
+    function startIndustrialVectorPrinting() {
         if (!axisX || !nozzleHead) return;
 
-        const letters = [pathP, pathH, path3, pathD];
+        // Dicionário para armazenar o comprimento total exato de cada vetor matemático
+        const lengths = {
+            p: pathP.getTotalLength(),
+            h: pathH.getTotalLength(),
+            3: path3.getTotalLength(),
+            d: pathD.getTotalLength()
+        };
 
-        // Prepara os vetores calculando o tamanho exato de cada traçado para o efeito de caneta
-        letters.forEach(path => {
-            if (path) {
-                let length = path.getTotalLength();
-                path.style.strokeDasharray = length;
-                path.style.strokeDashoffset = length;
-            }
-        });
+        // Reseta fisicamente todas as letras para o estado "não impresso" (oculto)
+        pathP.style.strokeDasharray = lengths.p; pathP.style.strokeDashoffset = lengths.p;
+        pathH.style.strokeDasharray = lengths.h; pathH.style.strokeDashoffset = lengths.h;
+        path3.style.strokeDasharray = lengths.3; path3.style.strokeDashoffset = lengths.3;
+        pathD.style.strokeDasharray = lengths.d; pathD.style.strokeDashoffset = lengths.d;
 
-        // Cronograma de coordenada física X e Y do bico injetor mapeado por letra
-        // Inicia do pezinho do P na base inferior (Y alto) e vai contornando
-        let sequence = [
-            // 🛠️ Imprimindo a Letra P (Sobe a perna, faz a curva e fecha no meio)
-            { time: 500,  y: 130, x: 10, target: pathP },
-            { time: 1200, y: 35,  x: 10, target: pathP },
-            { time: 1800, y: 35,  x: 23, target: pathP },
-            { time: 2400, y: 75,  x: 10, target: pathP },
+        // Posição inicial do Frame Mecânico
+        axisX.style.transform = "translateY(260px)"; 
+        nozzleHead.style.left = "5%";
 
-            // 🛠️ Imprimindo a Letra H (Base esquerda subindo, corta e faz a direita)
-            { time: 3200, y: 130, x: 28, target: pathH },
-            { time: 3800, y: 35,  x: 28, target: pathH },
-            { time: 4300, y: 75,  x: 33, target: pathH },
-            { time: 4900, y: 130, x: 38, target: pathH },
-            { time: 5400, y: 35,  x: 38, target: pathH },
+        // 🗺️ CRONOGRAMA DE IMPRESSÃO PASSO A PASSO (Sincronia Extrusor + Traçado)
+        let timeline = [
+            // --- LETRA P ---
+            { time: 500,  y: 240, x: 10, element: pathP, offset: lengths.p }, // Posiciona no pezinho do P
+            { time: 1000, y: 70,  x: 10, element: pathP, offset: lengths.p * 0.65 }, // Sobe reto a haste esquerda
+            { time: 1500, y: 70,  x: 21, element: pathP, offset: lengths.p * 0.30 }, // Faz a curva superior
+            { time: 2000, y: 150, x: 10, element: pathP, offset: 0 }, // Conclui e fecha a barriga do P no meio
 
-            // 🛠️ Imprimindo o Número 3 (Curva de cima para o meio, depois curva de baixo)
-            { time: 6200, y: 35,  x: 48, target: path3 },
-            { time: 6900, y: 75,  x: 52, target: path3 },
-            { time: 7600, y: 130, x: 48, target: path3 },
+            // --- LETRA H ---
+            { time: 2600, y: 240, x: 26, element: pathH, offset: lengths.h }, // Vai para o pé esquerdo do H
+            { time: 3200, y: 70,  x: 26, element: pathH, offset: lengths.h * 0.66 }, // Sobe a perna esquerda
+            { time: 3700, y: 150, x: 35, element: pathH, offset: lengths.h * 0.45 }, // Cruza a ponte central do H
+            { time: 4200, y: 240, x: 35, element: pathH, offset: lengths.h * 0.20 }, // Desce até o pé direito
+            { time: 4800, y: 70,  x: 35, element: pathH, offset: 0 }, // Sobe completando a perna direita do H
 
-            // 🛠️ Imprimindo a Letra D (Sobe reto e faz o arco externo completo)
-            { time: 8400, y: 130, x: 68, target: pathD },
-            { time: 9000, y: 35,  x: 68, target: pathD },
-            { time: 9800, y: 80,  x: 82, target: pathD },
-            { time: 10400, y: 130, x: 74, target: pathD },
+            // --- NÚMERO 3 ---
+            { time: 5500, y: 80,  x: 44, element: path3, offset: lengths.3 }, // Posiciona no topo do 3
+            { time: 6200, y: 150, x: 49, element: path3, offset: lengths.3 * 0.50 }, // Faz o primeiro arco até o meio
+            { time: 7000, y: 230, x: 44, element: path3, offset: 0 }, // Faz o arco inferior até a base do 3
 
-            // 🏁 Finalização: Bico sobe liberando o palco técnico limpo
-            { time: 11400, y: 15,  x: 46, target: null }
+            // --- LETRA D ---
+            { time: 7700, y: 240, x: 63, element: pathD, offset: lengths.d }, // Posiciona no pé traseiro do D
+            { time: 8300, y: 70,  x: 63, element: pathD, offset: lengths.d * 0.70 }, // Sobe a linha reta vertical
+            { time: 9100, y: 70,  x: 78, element: pathD, offset: lengths.d * 0.35 }, // Inicia a grande curva externa
+            { time: 9800, y: 240, x: 63, element: pathD, offset: 0 }, // Fecha o D embaixo na junção da base
+
+            // --- CONCLUSÃO ---
+            { time: 10800, y: 20,  x: 46, element: null, offset: 0 } // Recolhe o cabeçote pra cima limpando o palco
         ];
 
-        sequence.forEach(step => {
+        // Roda a engrenagem aplicando os estilos de movimentação e liberação de traço
+        timeline.forEach(step => {
             setTimeout(() => {
                 axisX.style.transform = `translateY(${step.y}px)`;
                 nozzleHead.style.left = `${step.x}%`;
                 
-                if (step.target) {
-                    step.target.classList.add("printing-active");
+                if (step.element) {
+                    step.element.classList.add("printing-active");
+                    step.element.style.strokeDashoffset = step.offset;
                 }
             }, step.time);
         });
     }
 
-    // Executa o desenho técnico estruturado
-    executeVectorPrinting();
+    // Executa a animação ativa
+    startIndustrialVectorPrinting();
 
     // Menu Rolagem Navbar
     window.addEventListener("scroll", function() {
@@ -91,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }, { threshold: 0.1 });
     document.querySelectorAll(".reveal-scroll").forEach(el => scrollObserver.observe(el));
 
-    // Contador Ativo de Tráfego do WhatsApp
+    // Contador de Usuários Ativos (WhatsApp)
     let activeClients = Math.floor(Math.random() * (22 - 12 + 1)) + 12;
     if (counterElement) counterElement.textContent = activeClients;
 
