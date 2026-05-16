@@ -1,0 +1,96 @@
+:root {
+    --bg-main: #060b13; 
+    --bg-radial: radial-gradient(circle at 50% 30%, #0f1b2d 0%, #04070c 100%);
+    --accent-gold: #f1c40f; 
+    --accent-blue: #1a73e8; 
+    --card-surface: rgba(15, 27, 45, 0.4);
+    --card-border: rgba(241, 196, 15, 0.15);
+    --text-primary: #ffffff; 
+    --text-secondary: #a0aec0;
+    --live-green: #00ff66;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+html { scroll-behavior: smooth; } /* Rolagem nativa suave via CSS */
+body { background-color: var(--bg-main); background-image: var(--bg-radial); color: var(--text-primary); line-height: 1.75; overflow-x: hidden; }
+
+/* Navbar Fixa */
+#navbar { display: flex; justify-content: space-between; align-items: center; padding: 2.2rem 8%; position: fixed; width: 100%; z-index: 1000; transition: all 0.4s ease; background: transparent; }
+#navbar.scrolled { background: rgba(6, 11, 19, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 1.2rem 8%; border-bottom: 1px solid rgba(241, 196, 15, 0.1); }
+.logo-text { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; letter-spacing: 3px; color: var(--text-primary); }
+.logo-text .accent { color: var(--accent-gold); }
+#navbar ul { display: flex; list-style: none; align-items: center; }
+#navbar ul li { margin-left: 2.5rem; }
+#navbar ul li a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+#navbar ul li a:hover { color: var(--accent-gold); }
+#navbar ul li a.btn-contato { padding: 0.6rem 1.4rem; border: 1px solid var(--accent-gold); color: var(--accent-gold); border-radius: 4px; font-family: 'Orbitron', sans-serif; }
+#navbar ul li a.btn-contato:hover { background: var(--accent-gold); color: var(--bg-main); }
+
+/* Hero Efeito Parallax */
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 24px; position: relative; overflow: hidden; }
+.video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; will-change: transform; }
+.video-background video { width: 100%; height: 100%; object-fit: cover; }
+.video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(6, 11, 19, 0.6), rgba(6, 11, 19, 0.9)); }
+.hero h1 { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; letter-spacing: 12px; margin-bottom: 1rem; color: var(--text-primary); }
+.hero h1 .accent { color: var(--accent-gold); text-shadow: 0 0 30px rgba(241, 196, 15, 0.3); }
+.subtitle { font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; }
+.cta-button { display: inline-block; padding: 1.1rem 3rem; border: 2px solid var(--accent-blue); color: var(--text-primary); text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-family: 'Orbitron', sans-serif; transition: all 0.4s ease; background: rgba(26, 115, 232, 0.1); }
+.cta-button:hover { background: var(--accent-blue); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(26, 115, 232, 0.4); }
+
+/* Seções de Conteúdo */
+.about-section { padding: 8rem 10% 4rem 10%; background: rgba(0, 0, 0, 0.3); }
+h2 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 2rem; text-align: center; }
+.about-text { max-width: 800px; margin: 0 auto 4rem auto; color: var(--text-secondary); font-size: 1.15rem; text-align: center; }
+.about-pillars { display: flex; justify-content: center; gap: 3rem; max-width: 1000px; margin: 0 auto; }
+.pillar { flex: 1; background: var(--card-surface); border: 1px solid var(--card-border); padding: 3rem 2.5rem; border-radius: 8px; }
+.pillar h4 { font-family: 'Orbitron', sans-serif; margin-bottom: 1.2rem; font-size: 1.2rem; color: var(--accent-gold); }
+.pillar p { color: var(--text-secondary); font-size: 0.95rem; }
+
+/* Box de Dados Operacionais */
+.live-counter-section { padding: 4rem 10%; display: flex; justify-content: center; }
+.counter-box { background: linear-gradient(135deg, rgba(15,27,45,0.7) 0%, rgba(4,7,12,0.9) 100%); padding: 4rem 3rem; border-radius: 12px; text-align: center; max-width: 620px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.6); border: 1px solid rgba(241, 196, 15, 0.1); }
+.live-indicator { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 1.5rem; }
+.pulsing-dot { width: 10px; height: 10px; background-color: var(--live-green); border-radius: 50%; box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.6); animation: livePulse 2s infinite; }
+@keyframes livePulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(0, 255, 102, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); } }
+.live-text { font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; color: var(--live-green); font-family: 'Orbitron', sans-serif; }
+#live-chat-count { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--accent-gold); }
+.counter-desc { color: var(--text-secondary); font-size: 0.95rem; }
+
+/* Grid de Soluções */
+.services { padding: 6rem 8%; }
+.section-title { text-align: center; margin-bottom: 4rem; }
+.section-title p { color: var(--text-secondary); }
+.services-grid { display: flex; justify-content: center; gap: 3rem; max-width: 1100px; margin: 0 auto; }
+.card { background: var(--card-surface); border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; transition: all 0.4s ease; flex: 1; max-width: 500px; }
+.card:hover { transform: translateY(-6px); border-color: var(--accent-gold); box-shadow: 0 15px 30px rgba(241, 196, 15, 0.05); }
+.card-image-wrap { width: 100%; height: 280px; overflow: hidden; border-bottom: 1px solid rgba(241, 196, 15, 0.1); position: relative; }
+.card-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.card:hover .card-image-wrap img { transform: scale(1.06); }
+.card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; margin: 2rem 2rem 1rem 2rem; color: #ffffff; }
+.card p { color: var(--text-secondary); font-size: 0.95rem; margin: 0 2rem 2.5rem 2rem; }
+
+.contact-section { padding: 6rem 10%; text-align: center; }
+footer { padding: 3rem 5%; text-align: center; background: #030509; border-top: 1px solid rgba(255, 255, 255, 0.02); }
+footer p { font-size: 0.85rem; color: #4a5568; }
+
+.whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3); z-index: 2000; transition: all 0.3s ease; }
+.whatsapp-icon { width: 30px; height: 30px; }
+.whatsapp-float:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 20px 40px rgba(37, 211, 102, 0.5); }
+
+/* CLASSE DE ANIMAÇÃO DE SCROLL (Ativada via JS) */
+.reveal-scroll { 
+    opacity: 0; 
+    transform: translateY(40px); 
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
+    will-change: transform, opacity;
+}
+.reveal-scroll.active { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+@media (max-width: 850px) {
+    .about-pillars, .services-grid { flex-direction: column; gap: 2rem; align-items: center; }
+    #navbar ul { display: none; }
+    .hero h1 { font-size: 3.5rem; }
+}
