@@ -25,7 +25,7 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
 .hero-content { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; }
 
 /* -----------------------------------------------------------
-   ⚙️ PARTE GRÁFICA DA IMPRESSORA 3D DE CONTORNO VETORIAL
+   ⚙️ GRÁFICO INDUSTRIAL E COMPONENTES DA IMPRESSORA
 ----------------------------------------------------------- */
 .printer-frame {
     position: relative;
@@ -46,7 +46,9 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background-size: 25px 25px;
-    background-image: linear-gradient(to right, rgba(59, 130, 246, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+    background-image: 
+        linear-gradient(to right, rgba(59, 130, 246, 0.04) 1px, transparent 1px), 
+        linear-gradient(to bottom, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
     z-index: 1;
 }
 
@@ -62,7 +64,7 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
     border-top: 3px solid #3b82f6; z-index: 3;
 }
 
-/* Haste do Eixo Horizontal X */
+/* Haste Horizontal Móvel (Eixo X) */
 .printer-axis-x {
     position: absolute;
     width: 93%;
@@ -71,66 +73,58 @@ body { background-color: var(--bg-dark); color: #ffffff; line-height: 1.7; overf
     left: 3.5%;
     z-index: 6;
     box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    transform: translateY(280px); /* Começa encostado na base */
-    transition: transform 0.08s linear;
+    transform: translateY(280px); /* Posição de repouso inferior */
+    transition: transform 0.1s linear; /* Movimento fluido linear casando com o JS */
 }
 
 /* Cabeçote Extrusor */
 .nozzle-head {
-    position: absolute; width: 44px; height: 36px; background: #1e293b; border: 1px solid #475569; top: -13px; left: 5%; transition: left 0.08s linear;
+    position: absolute; width: 44px; height: 36px; background: #1e293b; border: 1px solid #475569; top: -13px; 
+    left: 5%; 
+    transition: left 0.1s linear;
 }
 .nozzle-tip {
     position: absolute; bottom: -9px; left: 16px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 10px solid #cbd5e1;
 }
+/* Laser de fusão verde na ponta do extrusor */
 .nozzle-tip::after {
     content: ''; position: absolute; top: -12px; left: -3px; width: 6px; height: 6px;
     background: #00ff66; border-radius: 50%; box-shadow: 0 0 15px 6px #00ff66;
 }
 
-/* Container do Desenho SVG */
+/* Container de Desenho do Logotipo */
 .printer-svg-logo {
-    width: 80%;
-    height: 70%;
+    width: 85%;
+    height: 75%;
     z-index: 4;
 }
 
 /* -----------------------------------------------------------
-   🧬 REGRAS DAS TRILHAS DE CIRCUITO DA IMPRESSÃO REAL
+   🧬 REGRAS MECÂNICAS DE PREENCHIMENTO E DESENHO (SVG)
 ----------------------------------------------------------- */
 .vector-letter {
-    font-family: 'Orbitron', sans-serif;
-    stroke-width: 18px; /* Espessura grossa para parecer preenchimento */
+    stroke-width: 14px; /* Espessura ideal para as barras de circuito internas */
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
-    opacity: 0.1; /* Quase invisível antes do bico passar */
-    transition: opacity 0.2s;
+    opacity: 0.15; /* Exibe apenas o rastro do circuito antes da impressão */
+    /* ESSENCIAL: Transição suave do preenchimento enquanto o JS atualiza o offset */
+    transition: stroke-dashoffset 0.15s linear, opacity 0.2s; 
 }
 
-/* Efeito de Desenho Progressivo (Stroke Dash) */
+/* Classes controladas e disparadas ativamente pelo Script */
 .vector-letter.printing-active {
     opacity: 1;
-    animation: drawStroke 2s linear forwards;
 }
 
-/* Acabamento de Circuito com Barras internas */
+/* Filtros Metalizados aplicados às linhas de circuito */
 .gold-circuit {
-    stroke: url(#circuit-pattern);
-    background: linear-gradient(135deg, #ffe066, #d4af37, #aa8010);
-    filter: drop-shadow(0 0 2px #d4af37);
+    stroke: #d4af37;
+    filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.4));
 }
 .blue-circuit {
-    stroke: url(#circuit-pattern);
-    background: linear-gradient(135deg, #5da9e9, #1a5f9b, #0c2e4e);
-    filter: drop-shadow(0 0 2px #1a5f9b);
-}
-
-/* Força a cor metalizada por cima das linhas estruturais de circuito */
-.vector-letter.printing-active.gold-circuit { stroke: #d4af37; }
-.vector-letter.printing-active.blue-circuit { stroke: #1a5f9b; }
-
-@keyframes drawStroke {
-    to { stroke-dashoffset: 0; }
+    stroke: #1a5f9b;
+    filter: drop-shadow(0 0 3px rgba(26, 95, 155, 0.6));
 }
 
 /* ----------------------------------------------------------- */
