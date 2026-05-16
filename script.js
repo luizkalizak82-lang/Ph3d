@@ -3,21 +3,20 @@ document.addEventListener("DOMContentLoaded", function() {
     const navbar = document.querySelector("#navbar");
     const counterElement = document.getElementById("live-chat-count");
 
-    // Elementos mecânicos da extrusora
+    // Seleção dos motores mecânicos
     const axisX = document.getElementById("printer-laser-axis");
-    const nozzleHead = document.querySelector(".nozzle-head");
+    const nozzleHead = document.getElementById("printer-nozzle");
     
-    // Elementos geométricos das letras
+    // Caminhos das letras do logotipo
     const pathP = document.getElementById("path-p");
     const pathH = document.getElementById("path-h");
     const path3 = document.getElementById("path-3");
     const pathD = document.getElementById("path-d");
 
-    // 🚀 AUTOMAÇÃO DE IMPRESSÃO TRAÇADO POR TRAÇADO
     function startIndustrialVectorPrinting() {
         if (!axisX || !nozzleHead || !pathP || !pathH || !path3 || !pathD) return;
 
-        // Captura matemática exata do comprimento de cada caminho (linhas do filamento)
+        // Medição do tamanho dos caminhos vetoriais
         const lengths = {
             p: pathP.getTotalLength(),
             h: pathH.getTotalLength(),
@@ -25,50 +24,50 @@ document.addEventListener("DOMContentLoaded", function() {
             d: pathD.getTotalLength()
         };
 
-        // Aplica o tamanho e "esconde" a linha puxando o offset completamente para trás
+        // Recolhe o traçado para dentro do bico
         pathP.style.strokeDasharray = lengths.p; pathP.style.strokeDashoffset = lengths.p;
         pathH.style.strokeDasharray = lengths.h; pathH.style.strokeDashoffset = lengths.h;
         path3.style.strokeDasharray = lengths.3; path3.style.strokeDashoffset = lengths.3;
         pathD.style.strokeDasharray = lengths.d; pathD.style.strokeDashoffset = lengths.d;
 
-        // Estado inicial da máquina mecânica (Barra na base, cabeçote na esquerda)
-        axisX.style.transform = "translateY(240px)"; 
+        // Posição inicial no topo esquerdo
+        axisX.style.top = "10%"; 
         nozzleHead.style.left = "5%";
 
-        // 🗺️ CRONOGRAMA DE OPERAÇÃO (Casamento exato: Cabeçote X/Y + Fração do traço liberado)
+        // Linha do tempo calculada por Porcentagem (%) para precisão responsiva
         let timeline = [
-            // --- 🛠️ IMPRIMINDO A LETRA P ---
-            { time: 600,  y: 220, x: 10, element: pathP, offset: lengths.p }, // Sincroniza com a base inferior do P
-            { time: 1400, y: 55,  x: 10, element: pathP, offset: lengths.p * 0.60 }, // Sobe a perna vertical esquerda
-            { time: 2200, y: 55,  x: 21, element: pathP, offset: lengths.p * 0.25 }, // Faz a voltinha redonda de cima
-            { time: 2900, y: 130, x: 10, element: pathP, offset: 0 }, // Fecha o meio do P (Linha concluída!)
+            // --- Letra P ---
+            { time: 500,  y: 73, x: 10, element: pathP, offset: lengths.p },      
+            { time: 1300, y: 30, x: 10, element: pathP, offset: lengths.p * 0.62 }, 
+            { time: 2000, y: 30, x: 20, element: pathP, offset: lengths.p * 0.28 }, 
+            { time: 2600, y: 50, x: 10, element: pathP, offset: 0 },               
 
-            // --- 🛠️ IMPRIMINDO A LETRA H ---
-            { time: 3700, y: 220, x: 28, element: pathH, offset: lengths.h }, // Vai para o pezinho esquerdo do H
-            { time: 4500, y: 55,  x: 28, element: pathH, offset: lengths.h * 0.65 }, // Sobe a primeira haste vertical
-            { time: 5100, y: 130, x: 37, element: pathH, offset: lengths.h * 0.45 }, // Passa a barra conectora do meio
-            { time: 5800, y: 220, x: 37, element: pathH, offset: lengths.h * 0.20 }, // Desce a perna direita
-            { time: 6600, y: 55,  x: 37, element: pathH, offset: 0 }, // Sobe finalizando o H completo
+            // --- Letra H ---
+            { time: 3300, y: 73, x: 28, element: pathH, offset: lengths.h },        
+            { time: 4100, y: 30, x: 28, element: pathH, offset: lengths.h * 0.65 }, 
+            { time: 4700, y: 50, x: 37, element: pathH, offset: lengths.h * 0.45 }, 
+            { time: 5400, y: 73, x: 37, element: pathH, offset: lengths.h * 0.20 }, 
+            { time: 6100, y: 30, x: 37, element: pathH, offset: 0 },               
 
-            // --- 🛠️ IMPRIMINDO O NÚMERO 3 ---
-            { time: 7400, y: 65,  x: 47, element: path3, offset: lengths.3 }, // Inicia no topo superior do 3
-            { time: 8300, y: 130, x: 52, element: path3, offset: lengths.3 * 0.50 }, // Desenha a meia lua até o centro
-            { time: 9200, y: 220, x: 47, element: path3, offset: 0 }, // Faz a curva de baixo terminando o 3
+            // --- Número 3 ---
+            { time: 6800, y: 32, x: 47, element: path3, offset: lengths.3 },        
+            { time: 7600, y: 50, x: 53, element: path3, offset: lengths.3 * 0.50 }, 
+            { time: 8400, y: 71, x: 47, element: path3, offset: 0 },               
 
-            // --- 🛠️ IMPRIMINDO A LETRA D ---
-            { time: 10000, y: 220, x: 67, element: pathD, offset: lengths.d }, // Cola na base do pezinho do D
-            { time: 10800, y: 55,  x: 67, element: pathD, offset: lengths.d * 0.70 }, // Sobe a parede reta vertical
-            { time: 11700, y: 60,  x: 82, element: pathD, offset: lengths.d * 0.35 }, // Expande na grande curva arredondada
-            { time: 12500, y: 220, x: 73, element: pathD, offset: 0 }, // Encontra o ponto inferior fechando a logo
+            // --- Letra D ---
+            { time: 9100, y: 73, x: 67, element: pathD, offset: lengths.d },        
+            { time: 9800, y: 30, x: 67, element: pathD, offset: lengths.d * 0.70 }, 
+            { time: 10600, y: 32, x: 81, element: pathD, offset: lengths.d * 0.35 },
+            { time: 11300, y: 73, x: 73, element: pathD, offset: 0 },               
 
-            // --- 🏁 RECOLHIMENTO DA COMPONENTES ---
-            { time: 13600, y: 20,  x: 46, element: null, offset: 0 } // Afasta o bico para cima revelando o resultado limpo
+            // --- Fim e Recolhimento ---
+            { time: 12400, y: 10, x: 45, element: null, offset: 0 }                 
         ];
 
-        // Dispara a esteira aplicando as movimentações coordenadas no tempo exato
+        // Aplica os passos na ordem cronológica exata
         timeline.forEach(step => {
             setTimeout(() => {
-                axisX.style.transform = `translateY(${step.y}px)`;
+                axisX.style.top = `${step.y}%`;
                 nozzleHead.style.left = `${step.x}%`;
                 
                 if (step.element) {
@@ -79,16 +78,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Executa a esteira operacional
     startIndustrialVectorPrinting();
 
-    // Menu Rolagem Navbar
+    // Scroll Navbar
     window.addEventListener("scroll", function() {
         if (window.scrollY > 40) navbar.classList.add("scrolled");
         else navbar.classList.remove("scrolled");
     });
 
-    // Scroll Reveal 
+    // Scroll Reveal
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -99,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }, { threshold: 0.1 });
     document.querySelectorAll(".reveal-scroll").forEach(el => scrollObserver.observe(el));
 
-    // Monitor do Tráfego Técnico (Simulação de Atendimento)
+    // Contador de Usuários Online
     let activeClients = Math.floor(Math.random() * (22 - 12 + 1)) + 12;
     if (counterElement) counterElement.textContent = activeClients;
 
