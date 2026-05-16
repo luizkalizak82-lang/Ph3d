@@ -25,14 +25,26 @@
     <section id="home" class="hero">
         <div class="hero-content">
             
-            <div class="printer-container reveal-scroll">
-                <div class="printer-axis">
-                    <div class="printer-nozzle"></div>
+            <div class="printer-frame reveal-scroll">
+                <div class="printer-grid-bg"></div>
+                
+                <div class="axis-z-left"></div>
+                <div class="axis-z-right"></div>
+                
+                <div id="printer-laser-axis" class="printer-axis-x">
+                    <div class="nozzle-head">
+                        <div class="nozzle-tip"></div>
+                    </div>
                 </div>
                 
-                <h1 class="filament-logo">
-                    <span class="filament-gold">PH</span><span class="filament-blue">3D</span>
+                <h1 class="circuit-logo">
+                    <span id="letter-p" class="letter circuit-gold">P</span>
+                    <span id="letter-h" class="letter circuit-gold">H</span>
+                    <span id="letter-3" class="letter circuit-blue">3</span>
+                    <span id="letter-d" class="letter circuit-blue">D</span>
                 </h1>
+                
+                <div class="printer-bed"></div>
             </div>
             
             <p class="subtitle reveal-scroll">Prototipagem Rápida, Peças Customizadas e Colecionáveis sob Encomenda</p>
